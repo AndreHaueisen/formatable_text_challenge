@@ -15,20 +15,20 @@ class FormatableText extends StatefulWidget {
 class _FormatableTextState extends State<FormatableText> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return _buildPhrase();
   }
 
   Widget _buildPhrase() {
-    final List<PhrasePiece> questionMapList = Utils.parseStringFormat(widget.phrase);
+    final List<PhrasePiece> parsedString = Utils.parseStringFormat(widget.phrase);
     TextStyle parentTextStyle;
 
     final List<TextSpan> childrenSpans = [];
 
-    for (int index = 0; index < questionMapList.length; index++) {
-      String text = questionMapList[index].text;
-      TextStyleTag tag = questionMapList[index].tags.first;
+    for (int index = 0; index < parsedString.length; index++) {
+      final String text = parsedString[index].text;
+      final Set<TextStyleTag> tags = parsedString[index].tags;
 
-      childrenSpans.add(TextSpan(text: text, style: _getTextStyleFromTag(tag, fontSize: 16)));
+      childrenSpans.add(TextSpan(text: text, style: _getTextStyleFromTags(tags, fontSize: 16)));
     }
 
     TextSpan parentSpan = TextSpan(style: parentTextStyle, children: childrenSpans);
@@ -38,32 +38,25 @@ class _FormatableTextState extends State<FormatableText> {
     );
   }
 
-  /// Returns a text style depending on the TextStyleTag
-  TextStyle _getTextStyleFromTag(TextStyleTag tag, {Color color = const Color(0xFF212121), double fontSize = 14}) {
-    TextStyle textStyle;
+  TextStyle _getTextStyleFromTags(Set<TextStyleTag> tags, {Color color = const Color(0xFF212121), double fontSize = 14}) {
 
-    switch (tag) {
-      case TextStyleTag.NORMAL:
-        {
-          textStyle = TextStyle(fontStyle: FontStyle.normal, color: color, fontSize: fontSize);
-          break;
-        }
-      case TextStyleTag.BOLD:
-        {
-          textStyle = TextStyle(fontWeight: FontWeight.bold, color: color, fontSize: fontSize);
-          break;
-        }
-      case TextStyleTag.ITALIC:
-        {
-          textStyle = TextStyle(fontStyle: FontStyle.italic, color: color, fontSize: fontSize);
-          break;
-        }
-      case TextStyleTag.STRIKETHROUGH:
-        {
-          textStyle = TextStyle(color: color, fontSize: fontSize, decoration: TextDecoration.lineThrough);
-        }
+    FontWeight fontWeight;
+    FontStyle fontStyle;
+    TextDecoration decoration;
+
+    for(TextStyleTag tag in tags){
+      if(tag == TextStyleTag.NORMAL){
+        fontStyle = FontStyle.normal;
+      } else if (tag == TextStyleTag.BOLD){
+        fontWeight = FontWeight.w600;
+      } else if (tag == TextStyleTag.ITALIC){
+        fontStyle = FontStyle.italic;
+      } else if (tag == TextStyleTag.STRIKETHROUGH){
+        decoration = TextDecoration.lineThrough;
+      }
     }
-    return textStyle;
+
+    return TextStyle(fontWeight: fontWeight, fontStyle: fontStyle, color: color, fontSize: fontSize, decoration: decoration);
   }
 }
 

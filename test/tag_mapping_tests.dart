@@ -30,201 +30,201 @@ main() {
   });
 
   test("test phrase format parsing normal", () {
-    List<PhrasePiece> formatMapList = Utils.parseStringFormat(phraseNormal);
+    List<PhrasePiece> parsedString = Utils.parseStringFormat(phraseNormal);
 
-    expect(formatMapList[0].text, "The cow entered the prohibited zone and died a horrible death");
-    expect(formatMapList[0].tags.length, 1);
-    expect(formatMapList[0].tags.first, TextStyleTag.NORMAL);
+    expect(parsedString[0].text, "The cow entered the prohibited zone and died a horrible death");
+    expect(parsedString[0].tags.length, 1);
+    expect(parsedString[0].tags.first, TextStyleTag.NORMAL);
   });
 
   test("test phrase format parsing bold", () {
-    List<PhrasePiece> formatMapList = Utils.parseStringFormat(phraseBold);
+    List<PhrasePiece> parsedString = Utils.parseStringFormat(phraseBold);
 
-    expect(formatMapList[0].text, "The cow ");
-    expect(formatMapList[0].tags.length, 1);
-    expect(formatMapList[0].tags.first, TextStyleTag.NORMAL);
+    expect(parsedString[0].text, "The cow ");
+    expect(parsedString[0].tags.length, 1);
+    expect(parsedString[0].tags.first, TextStyleTag.NORMAL);
 
-    expect(formatMapList[1].text, "entered the");
-    expect(formatMapList[1].tags.length, 1);
-    expect(formatMapList[1].tags.first, TextStyleTag.BOLD);
+    expect(parsedString[1].text, "entered the");
+    expect(parsedString[1].tags.length, 1);
+    expect(parsedString[1].tags.first, TextStyleTag.BOLD);
 
-    expect(formatMapList[2].text, " prohibited zone and died ");
-    expect(formatMapList[2].tags.length, 1);
-    expect(formatMapList[2].tags.first, TextStyleTag.NORMAL);
+    expect(parsedString[2].text, " prohibited zone and died ");
+    expect(parsedString[2].tags.length, 1);
+    expect(parsedString[2].tags.first, TextStyleTag.NORMAL);
 
-    expect(formatMapList[3].text, "a horrible");
-    expect(formatMapList[3].tags.length, 1);
-    expect(formatMapList[3].tags.first, TextStyleTag.BOLD);
+    expect(parsedString[3].text, "a horrible");
+    expect(parsedString[3].tags.length, 1);
+    expect(parsedString[3].tags.first, TextStyleTag.BOLD);
 
-    expect(formatMapList[4].text, " death");
-    expect(formatMapList[4].tags.length, 1);
-    expect(formatMapList[4].tags.first, TextStyleTag.NORMAL);
+    expect(parsedString[4].text, " death");
+    expect(parsedString[4].tags.length, 1);
+    expect(parsedString[4].tags.first, TextStyleTag.NORMAL);
   });
 
   test("test phrase format parsing italic", () {
-    List<PhrasePiece> formatMapList = Utils.parseStringFormat(phraseItalic);
+    List<PhrasePiece> parsedString = Utils.parseStringFormat(phraseItalic);
 
-    expect(formatMapList[0].text, "The cow ");
-    expect(formatMapList[0].tags.length, 1);
-    expect(formatMapList[0].tags.first, TextStyleTag.NORMAL);
+    expect(parsedString[0].text, "The cow ");
+    expect(parsedString[0].tags.length, 1);
+    expect(parsedString[0].tags.first, TextStyleTag.NORMAL);
 
-    expect(formatMapList[1].text, "entered the");
-    expect(formatMapList[1].tags.length, 1);
-    expect(formatMapList[1].tags.first, TextStyleTag.ITALIC);
+    expect(parsedString[1].text, "entered the");
+    expect(parsedString[1].tags.length, 1);
+    expect(parsedString[1].tags.first, TextStyleTag.ITALIC);
 
-    expect(formatMapList[2].text, " prohibited zone and died ");
-    expect(formatMapList[2].tags.length, 1);
-    expect(formatMapList[2].tags.first, TextStyleTag.NORMAL);
+    expect(parsedString[2].text, " prohibited zone and died ");
+    expect(parsedString[2].tags.length, 1);
+    expect(parsedString[2].tags.first, TextStyleTag.NORMAL);
 
-    expect(formatMapList[3].text, "a horrible");
-    expect(formatMapList[3].tags.length, 1);
-    expect(formatMapList[3].tags.first, TextStyleTag.ITALIC);
+    expect(parsedString[3].text, "a horrible");
+    expect(parsedString[3].tags.length, 1);
+    expect(parsedString[3].tags.first, TextStyleTag.ITALIC);
 
-    expect(formatMapList[4].text, " death");
-    expect(formatMapList[4].tags.length, 1);
-    expect(formatMapList[4].tags.first, TextStyleTag.NORMAL);
+    expect(parsedString[4].text, " death");
+    expect(parsedString[4].tags.length, 1);
+    expect(parsedString[4].tags.first, TextStyleTag.NORMAL);
   });
 
   test("test phrase format parsing bold & italic", () {
-    List<PhrasePiece> formatMapList = Utils.parseStringFormat(phraseBoldItalic);
+    List<PhrasePiece> parsedString = Utils.parseStringFormat(phraseBoldItalic);
 
-    expect(formatMapList[0].text, "The cow ");
-    expect(formatMapList[0].tags.length, 1);
-    expect(formatMapList[0].tags.first, TextStyleTag.NORMAL);
+    expect(parsedString[0].text, "The cow ");
+    expect(parsedString[0].tags.length, 1);
+    expect(parsedString[0].tags.first, TextStyleTag.NORMAL);
 
-    expect(formatMapList[1].text, "entered the");
-    expect(formatMapList[1].tags.length, 1);
-    expect(formatMapList[1].tags.first, TextStyleTag.BOLD);
+    expect(parsedString[1].text, "entered the");
+    expect(parsedString[1].tags.length, 1);
+    expect(parsedString[1].tags.first, TextStyleTag.BOLD);
 
-    expect(formatMapList[2].text, " prohibited zone and died ");
-    expect(formatMapList[2].tags.length, 1);
-    expect(formatMapList[2].tags.first, TextStyleTag.NORMAL);
+    expect(parsedString[2].text, " prohibited zone and died ");
+    expect(parsedString[2].tags.length, 1);
+    expect(parsedString[2].tags.first, TextStyleTag.NORMAL);
 
-    expect(formatMapList[3].text, "a horrible");
-    expect(formatMapList[3].tags.length, 1);
-    expect(formatMapList[3].tags.first, TextStyleTag.ITALIC);
+    expect(parsedString[3].text, "a horrible");
+    expect(parsedString[3].tags.length, 1);
+    expect(parsedString[3].tags.first, TextStyleTag.ITALIC);
 
-    expect(formatMapList[4].text, " death");
-    expect(formatMapList[4].tags.length, 1);
-    expect(formatMapList[4].tags.first, TextStyleTag.NORMAL);
+    expect(parsedString[4].text, " death");
+    expect(parsedString[4].tags.length, 1);
+    expect(parsedString[4].tags.first, TextStyleTag.NORMAL);
   });
 
   test("test phrase format parsing italic & bold", () {
-    List<PhrasePiece> formatMapList = Utils.parseStringFormat(phraseItalicBold);
+    List<PhrasePiece> parsedString = Utils.parseStringFormat(phraseItalicBold);
 
-    expect(formatMapList[0].text, "The cow ");
-    expect(formatMapList[0].tags.length, 1);
-    expect(formatMapList[0].tags.first, TextStyleTag.NORMAL);
+    expect(parsedString[0].text, "The cow ");
+    expect(parsedString[0].tags.length, 1);
+    expect(parsedString[0].tags.first, TextStyleTag.NORMAL);
 
-    expect(formatMapList[1].text, "entered the");
-    expect(formatMapList[1].tags.length, 1);
-    expect(formatMapList[1].tags.first, TextStyleTag.ITALIC);
+    expect(parsedString[1].text, "entered the");
+    expect(parsedString[1].tags.length, 1);
+    expect(parsedString[1].tags.first, TextStyleTag.ITALIC);
 
-    expect(formatMapList[2].text, " prohibited zone and died ");
-    expect(formatMapList[2].tags.length, 1);
-    expect(formatMapList[2].tags.first, TextStyleTag.NORMAL);
+    expect(parsedString[2].text, " prohibited zone and died ");
+    expect(parsedString[2].tags.length, 1);
+    expect(parsedString[2].tags.first, TextStyleTag.NORMAL);
 
-    expect(formatMapList[3].text, "a horrible");
-    expect(formatMapList[3].tags.length, 1);
-    expect(formatMapList[3].tags.first, TextStyleTag.BOLD);
+    expect(parsedString[3].text, "a horrible");
+    expect(parsedString[3].tags.length, 1);
+    expect(parsedString[3].tags.first, TextStyleTag.BOLD);
 
-    expect(formatMapList[4].text, " death");
-    expect(formatMapList[4].tags.length, 1);
-    expect(formatMapList[4].tags.first, TextStyleTag.NORMAL);
+    expect(parsedString[4].text, " death");
+    expect(parsedString[4].tags.length, 1);
+    expect(parsedString[4].tags.first, TextStyleTag.NORMAL);
   });
 
   test("test phrase format parsing strikethrough & bold", () {
-    List<PhrasePiece> formatMapList = Utils.parseStringFormat(phraseStrikethroughBold);
+    List<PhrasePiece> parsedString = Utils.parseStringFormat(phraseStrikethroughBold);
 
-    expect(formatMapList[0].text, "The cow ");
-    expect(formatMapList[0].tags.length, 1);
-    expect(formatMapList[0].tags.first, TextStyleTag.NORMAL);
+    expect(parsedString[0].text, "The cow ");
+    expect(parsedString[0].tags.length, 1);
+    expect(parsedString[0].tags.first, TextStyleTag.NORMAL);
 
-    expect(formatMapList[1].text, "entered the");
-    expect(formatMapList[1].tags.length, 1);
-    expect(formatMapList[1].tags.first, TextStyleTag.STRIKETHROUGH);
+    expect(parsedString[1].text, "entered the");
+    expect(parsedString[1].tags.length, 1);
+    expect(parsedString[1].tags.first, TextStyleTag.STRIKETHROUGH);
 
-    expect(formatMapList[2].text, " prohibited zone and died ");
-    expect(formatMapList[2].tags.length, 1);
-    expect(formatMapList[2].tags.first, TextStyleTag.NORMAL);
+    expect(parsedString[2].text, " prohibited zone and died ");
+    expect(parsedString[2].tags.length, 1);
+    expect(parsedString[2].tags.first, TextStyleTag.NORMAL);
 
-    expect(formatMapList[3].text, "a horrible");
-    expect(formatMapList[3].tags.length, 1);
-    expect(formatMapList[3].tags.first, TextStyleTag.BOLD);
+    expect(parsedString[3].text, "a horrible");
+    expect(parsedString[3].tags.length, 1);
+    expect(parsedString[3].tags.first, TextStyleTag.BOLD);
 
-    expect(formatMapList[4].text, " death");
-    expect(formatMapList[4].tags.length, 1);
-    expect(formatMapList[4].tags.first, TextStyleTag.NORMAL);
+    expect(parsedString[4].text, " death");
+    expect(parsedString[4].tags.length, 1);
+    expect(parsedString[4].tags.first, TextStyleTag.NORMAL);
   });
 
   test("test phrase format parsing italic inside bold", () {
-    List<PhrasePiece> formatMapList = Utils.parseStringFormat(phraseItalicInsideBold);
+    List<PhrasePiece> parsedString = Utils.parseStringFormat(phraseItalicInsideBold);
 
-    expect(formatMapList[0].text, "The cow ");
-    expect(formatMapList[0].tags.length, 1);
-    expect(formatMapList[0].tags.first, TextStyleTag.NORMAL);
+    expect(parsedString[0].text, "The cow ");
+    expect(parsedString[0].tags.length, 1);
+    expect(parsedString[0].tags.first, TextStyleTag.NORMAL);
 
-    expect(formatMapList[1].text, "entered the");
-    expect(formatMapList[1].tags.length, 1);
-    expect(formatMapList[1].tags.first, TextStyleTag.BOLD);
+    expect(parsedString[1].text, "entered the");
+    expect(parsedString[1].tags.length, 1);
+    expect(parsedString[1].tags.first, TextStyleTag.BOLD);
 
-    expect(formatMapList[2].text, " prohibited zone and died ");
-    expect(formatMapList[2].tags.length, 2);
-    expect(formatMapList[2].tags.contains(TextStyleTag.BOLD), true);
-    expect(formatMapList[2].tags.contains(TextStyleTag.ITALIC), true);
+    expect(parsedString[2].text, " prohibited zone and died ");
+    expect(parsedString[2].tags.length, 2);
+    expect(parsedString[2].tags.contains(TextStyleTag.BOLD), true);
+    expect(parsedString[2].tags.contains(TextStyleTag.ITALIC), true);
 
-    expect(formatMapList[3].text, "a horrible");
-    expect(formatMapList[3].tags.length, 1);
-    expect(formatMapList[3].tags.first, TextStyleTag.BOLD);
+    expect(parsedString[3].text, "a horrible");
+    expect(parsedString[3].tags.length, 1);
+    expect(parsedString[3].tags.first, TextStyleTag.BOLD);
 
-    expect(formatMapList[4].text, " death");
-    expect(formatMapList[4].tags.length, 1);
-    expect(formatMapList[4].tags.first, TextStyleTag.NORMAL);
+    expect(parsedString[4].text, " death");
+    expect(parsedString[4].tags.length, 1);
+    expect(parsedString[4].tags.first, TextStyleTag.NORMAL);
   });
 
   test("test phrase format parsing italic inside bold", () {
-    List<PhrasePiece> formatMapList = Utils.parseStringFormat(phraseItalicInsideBold);
+    List<PhrasePiece> parsedString = Utils.parseStringFormat(phraseItalicInsideBold);
 
-    expect(formatMapList[0].text, "The cow ");
-    expect(formatMapList[0].tags.length, 1);
-    expect(formatMapList[0].tags.first, TextStyleTag.NORMAL);
+    expect(parsedString[0].text, "The cow ");
+    expect(parsedString[0].tags.length, 1);
+    expect(parsedString[0].tags.first, TextStyleTag.NORMAL);
 
-    expect(formatMapList[1].text, "entered the");
-    expect(formatMapList[1].tags.length, 1);
-    expect(formatMapList[1].tags.first, TextStyleTag.BOLD);
+    expect(parsedString[1].text, "entered the");
+    expect(parsedString[1].tags.length, 1);
+    expect(parsedString[1].tags.first, TextStyleTag.BOLD);
 
-    expect(formatMapList[2].text, " prohibited zone and died ");
-    expect(formatMapList[2].tags.length, 2);
-    expect(formatMapList[2].tags.contains(TextStyleTag.BOLD), true);
-    expect(formatMapList[2].tags.contains(TextStyleTag.ITALIC), true);
+    expect(parsedString[2].text, " prohibited zone and died ");
+    expect(parsedString[2].tags.length, 2);
+    expect(parsedString[2].tags.contains(TextStyleTag.BOLD), true);
+    expect(parsedString[2].tags.contains(TextStyleTag.ITALIC), true);
 
-    expect(formatMapList[3].text, "a horrible");
-    expect(formatMapList[3].tags.length, 1);
-    expect(formatMapList[3].tags.first, TextStyleTag.BOLD);
+    expect(parsedString[3].text, "a horrible");
+    expect(parsedString[3].tags.length, 1);
+    expect(parsedString[3].tags.first, TextStyleTag.BOLD);
 
-    expect(formatMapList[4].text, " death");
-    expect(formatMapList[4].tags.length, 1);
-    expect(formatMapList[4].tags.first, TextStyleTag.NORMAL);
+    expect(parsedString[4].text, " death");
+    expect(parsedString[4].tags.length, 1);
+    expect(parsedString[4].tags.first, TextStyleTag.NORMAL);
   });
 
   test("test single tag", () {
-    List<PhrasePiece> formatMapList = Utils.parseStringFormat(phraseItalicSingleTag);
+    List<PhrasePiece> parsedString = Utils.parseStringFormat(phraseItalicSingleTag);
 
-    expect(formatMapList[0].text, "The cow entered the${Constants.ITALIC_TAG} prohibited zone and died a horrible death");
-    expect(formatMapList[0].tags.length, 1);
-    expect(formatMapList[0].tags.first, TextStyleTag.NORMAL);
+    expect(parsedString[0].text, "The cow entered the${Constants.ITALIC_TAG} prohibited zone and died a horrible death");
+    expect(parsedString[0].tags.length, 1);
+    expect(parsedString[0].tags.first, TextStyleTag.NORMAL);
   });
 
   test("test starting with tag", () {
-    List<PhrasePiece> formatMapList = Utils.parseStringFormat(phraseStartingWithTag);
+    List<PhrasePiece> parsedString = Utils.parseStringFormat(phraseStartingWithTag);
 
-    expect(formatMapList[0].text, "The cow entered the");
-    expect(formatMapList[0].tags.length, 1);
-    expect(formatMapList[0].tags.first, TextStyleTag.ITALIC);
+    expect(parsedString[0].text, "The cow entered the");
+    expect(parsedString[0].tags.length, 1);
+    expect(parsedString[0].tags.first, TextStyleTag.ITALIC);
 
-    expect(formatMapList[1].text, " prohibited zone and died a horrible death");
-    expect(formatMapList[1].tags.length, 1);
-    expect(formatMapList[1].tags.first, TextStyleTag.NORMAL);
+    expect(parsedString[1].text, " prohibited zone and died a horrible death");
+    expect(parsedString[1].tags.length, 1);
+    expect(parsedString[1].tags.first, TextStyleTag.NORMAL);
   });
 
 }

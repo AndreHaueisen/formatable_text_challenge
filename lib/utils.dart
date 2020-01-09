@@ -10,12 +10,12 @@ class Utils {
         "(?<=${Constants.BOLD_TAG})|(?=${Constants.BOLD_TAG})|(?<=${Constants.ITALIC_TAG})|(?=${Constants.ITALIC_TAG})|(?<=${Constants.STRIKETHROUGH_TAG})|(?=${Constants.STRIKETHROUGH_TAG})";
 
     final List<String> brokenPhrase = text.split(RegExp(pattern));
-    List<PhrasePiece> phrasePieces = generatePiecesFromBrokenPhrase(brokenPhrase);
+    List<PhrasePiece> phrasePieces = _generatePiecesFromBrokenPhrase(brokenPhrase);
 
     return phrasePieces;
   }
 
-  static List<PhrasePiece> generatePiecesFromBrokenPhrase(List<String> brokenPhrase) {
+  static List<PhrasePiece> _generatePiecesFromBrokenPhrase(List<String> brokenPhrase) {
     final List<PhrasePiece> phraseWords = [];
     int index = 0;
 
@@ -28,8 +28,8 @@ class Utils {
       int forwardsItalicTagsCount = 0;
       int forwardsStrikethroughTagsCount = 0;
 
-      List<String> phraseBeforeWord = brokenPhrase.getRange(0, index).toList(growable: false);
-      List<String> phraseAfterWord = brokenPhrase.getRange(index, brokenPhrase.length).toList(growable: false);
+      final List<String> phraseBeforeWord = brokenPhrase.getRange(0, index).toList(growable: false);
+      final List<String> phraseAfterWord = brokenPhrase.getRange(index, brokenPhrase.length).toList(growable: false);
 
       for (String phrasePiece in phraseBeforeWord) {
         if (_isTag(phrasePiece)) {
@@ -51,7 +51,7 @@ class Utils {
       final int italicTagsTotalCount = backwardsItalicTagsCount + forwardsItalicTagsCount;
       final int strikeThroughTagsTotalCount = backwardsStrikethroughTagsCount + forwardsStrikethroughTagsCount;
 
-      Set<TextStyleTag> wordTags = extractWordTags(
+      final Set<TextStyleTag> wordTags = _extractWordTags(
         backwardsBoldTagsCount: backwardsBoldTagsCount,
         backwardsItalicTagsCount: backwardsItalicTagsCount,
         backwardsStrikethroughTagsCount: backwardsStrikethroughTagsCount,
@@ -85,7 +85,7 @@ class Utils {
 
     final List<PhrasePiece> phrasePieces = [];
     if (phraseWords.length > 1) {
-      phrasePieces.addAll(mergePieces(phraseWords: phraseWords));
+      phrasePieces.addAll(_mergePieces(phraseWords: phraseWords));
     } else {
       phrasePieces.addAll(phraseWords);
     }
@@ -93,7 +93,7 @@ class Utils {
     return phrasePieces;
   }
 
-  static List<PhrasePiece> mergePieces({@required List<PhrasePiece> phraseWords}) {
+  static List<PhrasePiece> _mergePieces({@required List<PhrasePiece> phraseWords}) {
     final List<PhrasePiece> phrasePieces = [];
     int index = 0;
 
@@ -125,8 +125,8 @@ class Utils {
       }
 
       phrasePieces.add(mergedPhrasePiece);
-      String textFromPhraseWords = convertPiecesToString(phraseWords);
-      String textFromPhrasePieces = convertPiecesToString(phrasePieces);
+      String textFromPhraseWords = _convertPiecesToString(phraseWords);
+      String textFromPhrasePieces = _convertPiecesToString(phrasePieces);
 
       if(textFromPhraseWords == textFromPhrasePieces) break;
     }
@@ -134,7 +134,7 @@ class Utils {
     return phrasePieces;
   }
 
-  static Set<TextStyleTag> extractWordTags({
+  static Set<TextStyleTag> _extractWordTags({
     @required int backwardsBoldTagsCount,
     @required int forwardsBoldTagsCount,
     @required int backwardsItalicTagsCount,
@@ -168,24 +168,11 @@ class Utils {
     return text == Constants.BOLD_TAG || text == Constants.ITALIC_TAG || text == Constants.STRIKETHROUGH_TAG;
   }
 
-  static String convertPiecesToString(List<PhrasePiece> pieces){
+  static String _convertPiecesToString(List<PhrasePiece> pieces){
     String text = '';
     for(PhrasePiece piece in pieces){
       text += piece.text;
     }
     return text;
-  }
-
-  static TextStyleTag convertStringToTextStyleTag(String tag) {
-    switch (tag) {
-      case Constants.BOLD_TAG:
-        return TextStyleTag.BOLD;
-      case Constants.ITALIC_TAG:
-        return TextStyleTag.ITALIC;
-      case Constants.STRIKETHROUGH_TAG:
-        return TextStyleTag.STRIKETHROUGH;
-      default:
-        return TextStyleTag.NORMAL;
-    }
   }
 }
