@@ -14,6 +14,7 @@ main() {
   String phraseStrikethroughBold;
   String phraseItalicInsideBold;
   String phraseItalicSingleTag;
+  String phraseStartingWithTag;
 
   setUp(() {
 
@@ -25,6 +26,7 @@ main() {
     phraseStrikethroughBold =  "The cow ${Constants.STRIKETHROUGH_TAG}entered the${Constants.STRIKETHROUGH_TAG} prohibited zone and died ${Constants.BOLD_TAG}a horrible${Constants.BOLD_TAG} death";
     phraseItalicInsideBold = "The cow ${Constants.BOLD_TAG}entered the${Constants.ITALIC_TAG} prohibited zone and died ${Constants.ITALIC_TAG}a horrible${Constants.BOLD_TAG} death";
     phraseItalicSingleTag = "The cow entered the${Constants.ITALIC_TAG} prohibited zone and died a horrible death";
+    phraseStartingWithTag = "${Constants.ITALIC_TAG}The cow entered the${Constants.ITALIC_TAG} prohibited zone and died a horrible death";
   });
 
   test("test phrase format parsing normal", () {
@@ -205,12 +207,24 @@ main() {
     expect(formatMapList[4].tags.first, TextStyleTag.NORMAL);
   });
 
-//  test("test single tag", () {
-//    List<PhrasePiece> formatMapList = Utils.parseStringFormat(phraseItalicSingleTag);
-//
-//    expect(formatMapList[0].text, "The cow entered the${Constants.ITALIC_TAG} prohibited zone and died a horrible death");
-//    expect(formatMapList[0].tags.length, 1);
-//    expect(formatMapList[0].tags.first, TextStyleTag.NORMAL);
-//  });
+  test("test single tag", () {
+    List<PhrasePiece> formatMapList = Utils.parseStringFormat(phraseItalicSingleTag);
+
+    expect(formatMapList[0].text, "The cow entered the${Constants.ITALIC_TAG} prohibited zone and died a horrible death");
+    expect(formatMapList[0].tags.length, 1);
+    expect(formatMapList[0].tags.first, TextStyleTag.NORMAL);
+  });
+
+  test("test starting with tag", () {
+    List<PhrasePiece> formatMapList = Utils.parseStringFormat(phraseStartingWithTag);
+
+    expect(formatMapList[0].text, "The cow entered the");
+    expect(formatMapList[0].tags.length, 1);
+    expect(formatMapList[0].tags.first, TextStyleTag.ITALIC);
+
+    expect(formatMapList[1].text, " prohibited zone and died a horrible death");
+    expect(formatMapList[1].tags.length, 1);
+    expect(formatMapList[1].tags.first, TextStyleTag.NORMAL);
+  });
 
 }
