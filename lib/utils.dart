@@ -31,6 +31,7 @@ class Utils {
     int looseItalicTagPosition = -1;
     int looseStrikethroughTagPosition = -1;
 
+    // goes through every word of the phrase classifying them with TextStyleTags
     while (index < brokenPhrase.length) {
       int backwardsBoldTagsCount = 0;
       int backwardsItalicTagsCount = 0;
@@ -62,6 +63,7 @@ class Utils {
         isLastStrikethroughTag = (isStrikethroughTag && strikeThroughTagsTotalCount.isOdd && (lastStrikeThroughTagPosition == index));
       }
 
+      // classify every word with its containing tags
       final Set<TextStyleTag> wordTags = _extractWordTags(
         backwardsBoldTagsCount: backwardsBoldTagsCount,
         backwardsItalicTagsCount: backwardsItalicTagsCount,
@@ -91,6 +93,8 @@ class Utils {
     }
 
     final List<PhrasePiece> phrasePieces = [];
+    // adds a loose tag back to the screen in case there is one
+    // a loose tag is a tag without its pair
     if (phraseWords.length > 1) {
       final totalTagCount = boldTagsTotalCount + italicTagsTotalCount + strikeThroughTagsTotalCount;
       if (looseBoldTagIndexPosition != -1) {
@@ -105,6 +109,8 @@ class Utils {
         phraseWords.insert((looseStrikethroughTagPosition - totalTagCount + 1), PhrasePiece(text: Constants.STRIKETHROUGH_TAG, tags: {TextStyleTag.NORMAL}));
       }
 
+      // merge words that have the same tags
+      // this is done to improve performance when drawing the ui
       phrasePieces.addAll(_mergePieces(phraseWords: phraseWords));
     } else {
       phrasePieces.addAll(phraseWords);
