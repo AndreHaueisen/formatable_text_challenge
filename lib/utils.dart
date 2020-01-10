@@ -97,16 +97,20 @@ class Utils {
     // a loose tag is a tag without its pair
     if (phraseWords.length > 1) {
       final totalTagCount = boldTagsTotalCount + italicTagsTotalCount + strikeThroughTagsTotalCount;
+      int insertPosition;
       if (looseBoldTagIndexPosition != -1) {
-        phraseWords.insert((looseBoldTagIndexPosition - totalTagCount + 1)  , PhrasePiece(text: Constants.BOLD_TAG, tags: {TextStyleTag.NORMAL}));
+        insertPosition = looseBoldTagIndexPosition - totalTagCount + 1;
+        phraseWords.insert(insertPosition.abs() , PhrasePiece(text: Constants.BOLD_TAG, tags: {TextStyleTag.NORMAL}));
       }
 
       if (looseItalicTagPosition != -1) {
-        phraseWords.insert((looseItalicTagPosition - totalTagCount + 1), PhrasePiece(text: Constants.ITALIC_TAG, tags: {TextStyleTag.NORMAL}));
+        insertPosition = looseItalicTagPosition - totalTagCount + 1;
+        phraseWords.insert(insertPosition.abs(), PhrasePiece(text: Constants.ITALIC_TAG, tags: {TextStyleTag.NORMAL}));
       }
 
       if (looseStrikethroughTagPosition != -1) {
-        phraseWords.insert((looseStrikethroughTagPosition - totalTagCount + 1), PhrasePiece(text: Constants.STRIKETHROUGH_TAG, tags: {TextStyleTag.NORMAL}));
+        insertPosition = looseStrikethroughTagPosition - totalTagCount + 1;
+        phraseWords.insert(insertPosition.abs(), PhrasePiece(text: Constants.STRIKETHROUGH_TAG, tags: {TextStyleTag.NORMAL}));
       }
 
       // merge words that have the same tags

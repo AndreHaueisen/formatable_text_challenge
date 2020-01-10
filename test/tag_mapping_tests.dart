@@ -16,6 +16,7 @@ main() {
   String phraseItalicSingleTag;
   String phraseOddTagCountOfSameTag;
   String phraseOddTagCountOfDifferentTags;
+  String phraseWithFirstTagHangging;
   String phraseStartingWithTag;
 
   setUp(() {
@@ -30,6 +31,7 @@ main() {
     phraseItalicSingleTag = "The cow entered the${Constants.ITALIC_TAG} prohibited zone and died a horrible death";
     phraseOddTagCountOfSameTag = "The cow entered the${Constants.ITALIC_TAG} prohibited zone and${Constants.ITALIC_TAG} died a horrible${Constants.ITALIC_TAG} death";
     phraseOddTagCountOfDifferentTags = "The cow entered the${Constants.ITALIC_TAG} prohibited zone and${Constants.ITALIC_TAG} died a horrible${Constants.BOLD_TAG} death";
+    phraseWithFirstTagHangging = "The cow entered the${Constants.ITALIC_TAG} prohibited zone and${Constants.BOLD_TAG} died a horrible${Constants.BOLD_TAG} death";
     phraseStartingWithTag = "${Constants.ITALIC_TAG}The cow entered the${Constants.ITALIC_TAG} prohibited zone and died a horrible death";
   });
 
@@ -241,6 +243,26 @@ main() {
     expect(parsedString[2].text, " died a horrible${Constants.BOLD_TAG} death");
     expect(parsedString[2].tags.length, 1);
     expect(parsedString[2].tags.first, TextStyleTag.NORMAL);
+  });
+
+  test("test with first tag hanging", (){
+    List<PhrasePiece> parsedString = Utils.parseStringFormat(phraseWithFirstTagHangging);
+
+    expect(parsedString[0].text, "The cow entered the${Constants.ITALIC_TAG}");
+    expect(parsedString[0].tags.length, 1);
+    expect(parsedString[0].tags.first, TextStyleTag.NORMAL);
+
+    expect(parsedString[1].text, " prohibited zone and");
+    expect(parsedString[1].tags.length, 1);
+    expect(parsedString[1].tags.first, TextStyleTag.NORMAL);
+
+    expect(parsedString[2].text, " died a horrible");
+    expect(parsedString[2].tags.length, 1);
+    expect(parsedString[2].tags.first, TextStyleTag.BOLD);
+
+    expect(parsedString[3].text, " death");
+    expect(parsedString[3].tags.length, 1);
+    expect(parsedString[3].tags.first, TextStyleTag.NORMAL);
   });
 
   test("test single tag", () {
