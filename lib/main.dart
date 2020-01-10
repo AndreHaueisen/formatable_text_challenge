@@ -1,4 +1,6 @@
+import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:formatable_text/state/app_state.dart';
 import 'package:formatable_text/widgets/formatable_text.dart';
 
 // The objective: https://faq.whatsapp.com/en/android/26000002/
@@ -6,7 +8,13 @@ import 'package:formatable_text/widgets/formatable_text.dart';
 // 1 - Bold tag is not * as in the description. I used @ instead because RegEx was not detecting * appropriately
 // 2 - it doesn't support monospace because there isn't an easy way to do this in Flutter. To the best of my knowledge, it would require a custom painter
 
-void main() => runApp(MyApp());
+Store<AppState> store;
+
+void main() {
+  var state = AppState.initialState();
+  store = Store<AppState>(initialState: state);
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override

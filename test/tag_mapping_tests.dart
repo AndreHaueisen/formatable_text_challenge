@@ -14,6 +14,8 @@ main() {
   String phraseStrikethroughBold;
   String phraseItalicInsideBold;
   String phraseItalicSingleTag;
+  String phraseOddTagCountOfSameTag;
+  String phraseOddTagCountOfDifferentTags;
   String phraseStartingWithTag;
 
   setUp(() {
@@ -26,6 +28,8 @@ main() {
     phraseStrikethroughBold =  "The cow ${Constants.STRIKETHROUGH_TAG}entered the${Constants.STRIKETHROUGH_TAG} prohibited zone and died ${Constants.BOLD_TAG}a horrible${Constants.BOLD_TAG} death";
     phraseItalicInsideBold = "The cow ${Constants.BOLD_TAG}entered the${Constants.ITALIC_TAG} prohibited zone and died ${Constants.ITALIC_TAG}a horrible${Constants.BOLD_TAG} death";
     phraseItalicSingleTag = "The cow entered the${Constants.ITALIC_TAG} prohibited zone and died a horrible death";
+    phraseOddTagCountOfSameTag = "The cow entered the${Constants.ITALIC_TAG} prohibited zone and${Constants.ITALIC_TAG} died a horrible${Constants.ITALIC_TAG} death";
+    phraseOddTagCountOfDifferentTags = "The cow entered the${Constants.ITALIC_TAG} prohibited zone and${Constants.ITALIC_TAG} died a horrible${Constants.BOLD_TAG} death";
     phraseStartingWithTag = "${Constants.ITALIC_TAG}The cow entered the${Constants.ITALIC_TAG} prohibited zone and died a horrible death";
   });
 
@@ -205,6 +209,38 @@ main() {
     expect(parsedString[4].text, " death");
     expect(parsedString[4].tags.length, 1);
     expect(parsedString[4].tags.first, TextStyleTag.NORMAL);
+  });
+
+  test("test odd tag count of same tag", (){
+    List<PhrasePiece> parsedString = Utils.parseStringFormat(phraseOddTagCountOfSameTag);
+
+    expect(parsedString[0].text, "The cow entered the");
+    expect(parsedString[0].tags.length, 1);
+    expect(parsedString[0].tags.first, TextStyleTag.NORMAL);
+
+    expect(parsedString[1].text, " prohibited zone and");
+    expect(parsedString[1].tags.length, 1);
+    expect(parsedString[1].tags.first, TextStyleTag.ITALIC);
+
+    expect(parsedString[2].text, " died a horrible${Constants.ITALIC_TAG} death");
+    expect(parsedString[2].tags.length, 1);
+    expect(parsedString[2].tags.first, TextStyleTag.NORMAL);
+  });
+
+  test("test odd tag count of different tags", (){
+    List<PhrasePiece> parsedString = Utils.parseStringFormat(phraseOddTagCountOfDifferentTags);
+
+    expect(parsedString[0].text, "The cow entered the");
+    expect(parsedString[0].tags.length, 1);
+    expect(parsedString[0].tags.first, TextStyleTag.NORMAL);
+
+    expect(parsedString[1].text, " prohibited zone and");
+    expect(parsedString[1].tags.length, 1);
+    expect(parsedString[1].tags.first, TextStyleTag.ITALIC);
+
+    expect(parsedString[2].text, " died a horrible${Constants.BOLD_TAG} death");
+    expect(parsedString[2].tags.length, 1);
+    expect(parsedString[2].tags.first, TextStyleTag.NORMAL);
   });
 
   test("test single tag", () {
