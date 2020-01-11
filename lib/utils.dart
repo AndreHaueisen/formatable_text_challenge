@@ -6,7 +6,7 @@ import 'package:collection/collection.dart' as collections;
 
 class Utils {
 
-
+  const Utils._();
 
   static List<PhrasePiece> parseStringFormat(String text) {
     const String pattern =
