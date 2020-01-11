@@ -1,7 +1,10 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:formatable_text/page_connector.dart';
+import 'package:formatable_text/connectors/formatted_text_connector.dart';
+import 'package:formatable_text/page.dart';
 import 'package:formatable_text/state/app_state.dart';
+
+import 'connectors/text_field_connector.dart';
 
 // The objective: https://faq.whatsapp.com/en/android/26000002/
 // Two observations:
@@ -26,7 +29,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: PageConnector(),
+        home: Page(),
       ),
     );
   }

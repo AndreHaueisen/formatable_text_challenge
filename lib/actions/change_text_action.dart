@@ -5,9 +5,13 @@ import 'package:formatable_text/state/app_state.dart';
 
 class ChangeTextAction extends ReduxAction<AppState> {
 
+  final String newText;
+
+  ChangeTextAction(this.newText);
+
   @override
   AppState reduce() {
-    String newText = state.changeTextEvt.state;
+    print('change text action called');
     return state.copy(
       changeTextEvt: Event<String>(newText),
     );

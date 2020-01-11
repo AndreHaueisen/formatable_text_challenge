@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:formatable_text/constants.dart';
 import 'package:formatable_text/models/phrase_piece.dart';
-import 'package:formatable_text/widgets/formatable_text.dart';
+import 'package:formatable_text/widgets/formattable_text.dart';
 import 'package:collection/collection.dart' as collections;
 
 class Utils {
+
+
+
   static List<PhrasePiece> parseStringFormat(String text) {
-    final String pattern =
+    const String pattern =
         "(?<=${Constants.BOLD_TAG})|(?=${Constants.BOLD_TAG})|(?<=${Constants.ITALIC_TAG})|(?=${Constants.ITALIC_TAG})|(?<=${Constants.STRIKETHROUGH_TAG})|(?=${Constants.STRIKETHROUGH_TAG})";
 
     final List<String> brokenPhrase = text.split(RegExp(pattern));

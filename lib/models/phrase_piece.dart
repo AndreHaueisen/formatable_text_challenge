@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:formatable_text/widgets/formatable_text.dart';
+import 'package:formatable_text/widgets/formattable_text.dart';
 
 class PhrasePiece {
 

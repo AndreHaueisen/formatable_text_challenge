@@ -9,7 +9,7 @@ class AppState {
 
   AppState({this.changeTextEvt});
 
-  AppState copy({int counter, bool waiting, Event clearTextEvt, Event<String> changeTextEvt}) =>
+  AppState copy({int counter, bool waiting, Event<String> changeTextEvt}) =>
       AppState(
         changeTextEvt: changeTextEvt ?? this.changeTextEvt,
       );
@@ -18,22 +18,4 @@ class AppState {
     changeTextEvt: Event<String>.spent(),
   );
   
-}
-
-class ViewModel extends BaseModel<AppState> {
-  ViewModel();
-
-  Event<String> changeTextEvt;
-  VoidCallback onChange;
-
-  ViewModel.build({
-    @required this.changeTextEvt,
-    @required this.onChange,
-  }) : super(equals: [changeTextEvt]);
-
-  @override
-  ViewModel fromStore() => ViewModel.build(
-    changeTextEvt: state.changeTextEvt,
-    onChange: () => dispatch(ChangeTextAction()),
-  );
 }

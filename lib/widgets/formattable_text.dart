@@ -3,22 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:formatable_text/models/phrase_piece.dart';
 import 'package:formatable_text/utils.dart';
 
-class FormatableText extends StatefulWidget {
+class FormattedText extends StatefulWidget {
   final String phrase;
 
-  FormatableText({@required this.phrase}) : assert(phrase != null);
+  FormattedText({@required String phrase}) :this.phrase = phrase ?? '';
 
   @override
-  _FormatableTextState createState() => _FormatableTextState();
+  _FormattedTextState createState() => _FormattedTextState();
 }
 
-class _FormatableTextState extends State<FormatableText> {
+class _FormattedTextState extends State<FormattedText> {
   @override
   Widget build(BuildContext context) {
-    return _buildPhrase();
-  }
-
-  Widget _buildPhrase() {
     final List<PhrasePiece> parsedString = Utils.parseStringFormat(widget.phrase);
     TextStyle parentTextStyle;
 
@@ -32,7 +28,6 @@ class _FormatableTextState extends State<FormatableText> {
     }
 
     TextSpan parentSpan = TextSpan(style: parentTextStyle, children: childrenSpans);
-
     return RichText(
       text: parentSpan,
     );

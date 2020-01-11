@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:formatable_text/constants.dart';
 import 'package:formatable_text/models/phrase_piece.dart';
 import 'package:formatable_text/utils.dart';
-import 'package:formatable_text/widgets/formatable_text.dart';
+import 'package:formatable_text/widgets/formattable_text.dart';
 
 main() {
 
