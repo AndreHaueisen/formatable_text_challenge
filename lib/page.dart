@@ -2,26 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:formatable_text/connectors/formatted_text_connector.dart';
 import 'package:formatable_text/connectors/text_field_connector.dart';
 
-class Page extends StatefulWidget {
-
-  @override
-  _PageState createState() => _PageState();
-}
-
-class _PageState extends State<Page> {
-  TextEditingController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+class Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
