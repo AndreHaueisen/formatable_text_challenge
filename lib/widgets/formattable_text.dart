@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:formatable_text/models/merged_phrase_pieces.dart';
 import 'package:formatable_text/models/phrase_piece.dart';
 import 'package:formatable_text/utils.dart';
 
@@ -15,14 +16,14 @@ class FormattedText extends StatefulWidget {
 class _FormattedTextState extends State<FormattedText> {
   @override
   Widget build(BuildContext context) {
-    final List<PhrasePiece> parsedString = Utils.parseStringFormat(widget.phrase);
+    final MergedPhrasePieces phrasePieces = Utils.parseStringFormat(widget.phrase);
     TextStyle parentTextStyle;
 
     final List<TextSpan> childrenSpans = [];
 
-    for (int index = 0; index < parsedString.length; index++) {
-      final String text = parsedString[index].text;
-      final Set<TextStyleTag> tags = parsedString[index].tags;
+    for (int index = 0; index < phrasePieces.mergedPhrasePieces.length; index++) {
+      final String text = phrasePieces.mergedPhrasePieces[index].text;
+      final Set<TextStyleTag> tags = phrasePieces.mergedPhrasePieces[index].tags;
 
       childrenSpans.add(TextSpan(text: text, style: _getTextStyleFromTags(tags, fontSize: 16)));
     }
